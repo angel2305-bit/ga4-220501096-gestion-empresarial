@@ -87,3 +87,4 @@ router.get('/verificar', (req, res) => {
 });
 
 module.exports = router;
+// Rutas de login y verificacion - Angel De La Rosa
