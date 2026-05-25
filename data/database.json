@@ -1,0 +1,67 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Administrador",
+      "apellido": "Sistema",
+      "email": "admin@empresa.com",
+      "password": "admin123",
+      "rol": "admin",
+      "telefono": "3001234567",
+      "activo": true,
+      "creadoEn": "2026-05-25T19:49:43.436Z",
+      "actualizadoEn": "2026-05-25T19:49:43.438Z"
+    },
+    {
+      "id": 2,
+      "nombre": "Juan",
+      "apellido": "Perez",
+      "email": "juan@empresa.com",
+      "password": "juan123",
+      "rol": "usuario",
+      "telefono": "3109876543",
+      "activo": true,
+      "creadoEn": "2026-05-25T19:49:43.438Z",
+      "actualizadoEn": "2026-05-25T19:49:43.438Z"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Desarrollo Web",
+      "descripcion": "Creacion de aplicaciones web a medida",
+      "categoria": "Servicio",
+      "precio": 2500000,
+      "stock": 999,
+      "activo": true,
+      "creadoEn": "2026-05-25T19:49:43.438Z",
+      "actualizadoEn": "2026-05-25T19:49:43.438Z"
+    },
+    {
+      "id": 2,
+      "nombre": "Consultoria TI",
+      "descripcion": "Asesoria en infraestructura tecnologica",
+      "categoria": "Servicio",
+      "precio": 1800000,
+      "stock": 999,
+      "activo": true,
+      "creadoEn": "2026-05-25T19:49:43.438Z",
+      "actualizadoEn": "2026-05-25T19:49:43.438Z"
+    },
+    {
+      "id": 3,
+      "nombre": "Laptop HP Pavilion",
+      "descripcion": "Portatil HP Pavilion 15, Intel Core i5, 8GB RAM, 512GB SSD",
+      "categoria": "Producto",
+      "precio": 3200000,
+      "stock": 15,
+      "activo": true,
+      "creadoEn": "2026-05-25T19:49:43.438Z",
+      "actualizadoEn": "2026-05-25T19:49:43.438Z"
+    }
+  ],
+  "meta": {
+    "ultimoIdUsuario": 2,
+    "ultimoIdProducto": 3
+  }
+}

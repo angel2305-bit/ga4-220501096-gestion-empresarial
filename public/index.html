@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion Empresarial | GA4-220501096</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  PANTALLA DE LOGIN — visible antes de autenticarse         -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div id="pantallaLogin" class="login-overlay">
+    <div class="login-card">
+
+      <div class="login-logo">⬡</div>
+      <h1 class="login-titulo">Gestion Empresarial</h1>
+      <p class="login-sub">Inicia sesion para continuar</p>
+
+      <div class="login-form">
+        <div class="form-group">
+          <label for="loginEmail">Correo electronico</label>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="admin@empresa.com"
+            onkeydown="if(event.key==='Enter') document.getElementById('loginPassword').focus()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="••••••••"
+            onkeydown="if(event.key==='Enter') _handleLogin()"
+          />
+        </div>
+
+        <p id="loginError" class="login-error"></p>
+
+        <button class="btn btn--primary btn--full" onclick="_handleLogin()">
+          Iniciar Sesion
+        </button>
+      </div>
+
+      <div class="login-hint">
+        <strong>Usuarios de prueba:</strong><br/>
+        admin@empresa.com / admin123 (Administrador)<br/>
+        juan@empresa.com / juan123 (Usuario)
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  APP PRINCIPAL — visible solo despues de hacer login       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div id="appPrincipal" style="display:none; width:100%; height:100vh; display:none; flex-direction:row;">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <span class="brand-icon">⬡</span>
+        <div>
+          <div class="brand-title">Gestion</div>
+          <div class="brand-sub">Empresarial v2.0</div>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="nav-label">Modulos</div>
+        <button class="nav-btn active" data-module="dashboard" onclick="App.navegar('dashboard')">
+          <span class="nav-icon">◈</span> Dashboard
+        </button>
+        <button class="nav-btn" data-module="usuarios" onclick="App.navegar('usuarios')">
+          <span class="nav-icon">◉</span> Usuarios
+        </button>
+        <button class="nav-btn" data-module="productos" onclick="App.navegar('productos')">
+          <span class="nav-icon">◆</span> Productos &amp; Servicios
+        </button>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="evidence-badge">GA4-220501096-AA1-EV02</div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main">
+
+      <!-- HEADER con info del usuario y boton de cerrar sesion -->
+      <header class="topbar">
+        <div class="topbar__title" id="pageTitle">Dashboard</div>
+        <div class="topbar__actions">
+          <span class="usuario-info" id="nombreUsuario"></span>
+          <button class="btn btn--logout" onclick="App.cerrarSesion()">
+            Cerrar Sesion
+          </button>
+        </div>
+      </header>
+
+      <!-- VISTAS -->
+      <div class="content" id="content">
+
+        <!-- DASHBOARD -->
+        <section class="view active" id="view-dashboard">
+          <div class="dashboard-grid">
+            <div class="stat-card stat-card--blue">
+              <div class="stat-card__label">Total Usuarios</div>
+              <div class="stat-card__value" id="stat-users">—</div>
+              <div class="stat-card__icon">◉</div>
+            </div>
+            <div class="stat-card stat-card--green">
+              <div class="stat-card__label">Productos / Servicios</div>
+              <div class="stat-card__value" id="stat-products">—</div>
+              <div class="stat-card__icon">◆</div>
+            </div>
+            <div class="stat-card stat-card--amber">
+              <div class="stat-card__label">Categorias</div>
+              <div class="stat-card__value" id="stat-cats">—</div>
+              <div class="stat-card__icon">◈</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__head">
+              <h2>Endpoints de la API</h2>
+            </div>
+            <div class="panel__body">
+              <div class="endpoint-list">
+                <div class="endpoint-group">
+                  <div class="endpoint-group__title">🔐 Autenticacion (Publica)</div>
+                  <div class="endpoint-item"><span class="badge badge--post">POST</span><code>/api/auth/login</code></div>
+                  <div class="endpoint-item"><span class="badge badge--get">GET</span><code>/api/auth/verificar</code></div>
+                </div>
+                <div class="endpoint-group">
+                  <div class="endpoint-group__title">👤 Usuarios (Protegido)</div>
+                  <div class="endpoint-item"><span class="badge badge--get">GET</span><code>/api/usuarios</code></div>
+                  <div class="endpoint-item"><span class="badge badge--get">GET</span><code>/api/usuarios/:id</code></div>
+                  <div class="endpoint-item"><span class="badge badge--post">POST</span><code>/api/usuarios</code></div>
+                  <div class="endpoint-item"><span class="badge badge--put">PUT</span><code>/api/usuarios/:id</code></div>
+                  <div class="endpoint-item"><span class="badge badge--delete">DELETE</span><code>/api/usuarios/:id</code></div>
+                </div>
+                <div class="endpoint-group">
+                  <div class="endpoint-group__title">📦 Productos (Protegido)</div>
+                  <div class="endpoint-item"><span class="badge badge--get">GET</span><code>/api/productos</code></div>
+                  <div class="endpoint-item"><span class="badge badge--get">GET</span><code>/api/productos/:id</code></div>
+                  <div class="endpoint-item"><span class="badge badge--post">POST</span><code>/api/productos</code></div>
+                  <div class="endpoint-item"><span class="badge badge--put">PUT</span><code>/api/productos/:id</code></div>
+                  <div class="endpoint-item"><span class="badge badge--delete">DELETE</span><code>/api/productos/:id</code></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- USUARIOS -->
+        <section class="view" id="view-usuarios">
+          <div class="view-header">
+            <h2>Gestion de Usuarios</h2>
+            <button class="btn btn--primary" onclick="UserModule.openForm()">+ Nuevo Usuario</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="searchUsers" placeholder="Buscar usuario..." oninput="UserModule.filter(this.value)" />
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="usersTable">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Nombre</th><th>Email</th>
+                  <th>Rol</th><th>Telefono</th><th>Estado</th><th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="usersBody">
+                <tr><td colspan="7" class="loading-row">Cargando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- PRODUCTOS -->
+        <section class="view" id="view-productos">
+          <div class="view-header">
+            <h2>Productos &amp; Servicios</h2>
+            <button class="btn btn--primary" onclick="ProductModule.openForm()">+ Nuevo Item</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="searchProducts" placeholder="Buscar producto..." oninput="ProductModule.filter(this.value)" />
+            <select id="filterCat" onchange="ProductModule.filterCat(this.value)">
+              <option value="">Todas las categorias</option>
+              <option value="Producto">Producto</option>
+              <option value="Servicio">Servicio</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="productsTable">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Nombre</th><th>Categoria</th>
+                  <th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="productsBody">
+                <tr><td colspan="7" class="loading-row">Cargando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL para formularios -->
+  <div class="modal-overlay" id="modalOverlay" onclick="Modal.close()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal__head">
+        <h3 id="modalTitle">Formulario</h3>
+        <button class="modal__close" onclick="Modal.close()">✕</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- TOASTS para notificaciones -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/ApiService.js"></script>
+  <script src="js/UserModule.js"></script>
+  <script src="js/ProductModule.js"></script>
+  <script src="js/App.js"></script>
+
+  <script>
+    // Funcion global para manejar el submit del login
+    function _handleLogin() {
+      const email    = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      App.iniciarSesion(email, password);
+    }
+  </script>
+
+</body>
+</html>
