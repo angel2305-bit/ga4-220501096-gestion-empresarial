@@ -43,3 +43,4 @@ function verificarToken(req, res, next) {
 }
 
 module.exports = { verificarToken, CLAVE_SECRETA };
+// Modulo de autenticacion - Angel De La Rosa
