@@ -70,3 +70,4 @@ app.listen(PUERTO, () => {
 });
 
 module.exports = app;
+// Servidor principal con rutas protegidas - Angel De La Rosa
