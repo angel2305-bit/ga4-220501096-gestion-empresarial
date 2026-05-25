@@ -161,3 +161,4 @@ const App = (() => {
   return { navegar, iniciarSesion, cerrarSesion };
 
 })();
+// Manejo de sesion y token JWT - Angel De La Rosa
